@@ -1,0 +1,25 @@
+--- Syscall Cost (syscall_cost.c) ---
+Method: 1,000,000 x 0-byte read() syscalls, 11 trials, median reported
+Timer resolution (median of 11): 0 us
+Iterations : 1000000
+Trials     : 11
+Syscall cost (median): 76.46 ns
+
+--- Context Switch Cost (ctx_switch_cost.c) ---
+Method: 100,000 ping-pong round trips via pipes (parent <-> child), 11 trials, median reported
+Each round trip = 2 context switches
+
+With CPU affinity pinned to core 0:
+  Iterations (round trips): 100000
+  Trials                  : 11
+  Context switch cost (median): 959.5 ns
+
+Without CPU affinity (unpinned):
+  Iterations (round trips): 100000
+  Trials                  : 11
+  Context switch cost (median): 1734.0 ns
+
+--- Summary ---
+Syscall cost             : ~76 ns
+Context switch (pinned)  : ~960 ns  
+Context switch (unpinned): ~1734 ns
